@@ -1,0 +1,3 @@
+C:/Users/arsen/CLionProjects/c-study/csfml-game-of-life/cmake-build-debug/CMakeFiles/csfml-game-of-life.dir
+C:/Users/arsen/CLionProjects/c-study/csfml-game-of-life/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/arsen/CLionProjects/c-study/csfml-game-of-life/cmake-build-debug/CMakeFiles/rebuild_cache.dir

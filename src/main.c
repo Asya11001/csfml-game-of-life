@@ -27,6 +27,8 @@ int main(void)
 
 	while (sfRenderWindow_isOpen(window))
 	{
+
+
 		sfEvent event;
 		while (sfRenderWindow_pollEvent(window, &event))
 		{
