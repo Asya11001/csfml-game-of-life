@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics/RectangleShape.h>
 
-#include "utility.h"
+#include "util.h"
 
 void update_grid(sfRectangleShape*** grid, int size);
 
