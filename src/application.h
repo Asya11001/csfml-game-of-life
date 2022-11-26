@@ -14,4 +14,6 @@ void update(Application* app);
 void processInput(Application* app);
 void render(Application* app);
 
+Application createApplication();
+
 #endif
