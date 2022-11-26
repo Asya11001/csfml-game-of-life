@@ -6,16 +6,10 @@ void update_grid(sfRectangleShape*** grid, int size)
 	{
 		for (int col = 0; col < size; ++col)
 		{
-			// if the cell is dead
-			sfColor cellColor = sfRectangleShape_getFillColor(grid[row][col]);
-			if (colorsAreEqual(&cellColor, &sfBlack))
-			{
-				/* ... */
-			}
-			else
-			{
-				/* ... */
-			}
+			// if the cell is dead:
+			// check neighbours of a dead cell
+			// if the cell is alive:
+			// check the neighbours of an alive cell
 		}
 	}
 }
