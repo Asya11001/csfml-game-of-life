@@ -10,9 +10,9 @@ typedef struct Application
 
 void run(Application* app);
 
-void update(Application* app);
-void processInput(Application* app);
-void render(Application* app);
+static void update(Application* app);
+static void processInput(Application* app);
+static void render(Application* app);
 
 Application createApplication();
 

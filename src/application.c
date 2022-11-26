@@ -21,12 +21,12 @@ void run(Application* app)
 	}
 }
 
-void update(Application* app)
+static void update(Application* app)
 {
 	/* ... */
 }
 
-void processInput(Application* app)
+static void processInput(Application* app)
 {
 	sfEvent event;
 	while (sfRenderWindow_pollEvent(app->m_window, &event))
@@ -39,7 +39,7 @@ void processInput(Application* app)
 	}
 }
 
-void render(Application* app)
+static void render(Application* app)
 {
 	sfRenderWindow_clear(app->m_window, sfBlack);
 
