@@ -1,6 +1,6 @@
 #include "application.h"
 
-Application createApplication()
+Application createApplication(void)
 {
 	sfVideoMode mode = { 800, 600 };
 	sfRenderWindow* window = sfRenderWindow_create(mode, "game", sfDefaultStyle, NULL);
