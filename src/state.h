@@ -20,8 +20,8 @@ typedef struct State
 State createState(Context context, StateStack* stateStack);
 Context createContext(sfRenderWindow* window);
 
-void requestStackPush(StateId id);
-void requestStackPop();
-void requestStackClear();
+void requestStackPush(State* state, StateId id);
+void requestStackPop(State* state);
+void requestStackClear(State* state);
 
 #endif
