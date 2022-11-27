@@ -1,14 +1,8 @@
 #ifndef STATE_AUXILIARY_STRUCTURES_H
 #define STATE_AUXILIARY_STRUCTURES_H
 
-struct State;
 typedef struct State State;
-struct PendingChange;
 typedef struct PendingChange PendingChange;
-
-// to-do:
-// vector of state pointers (title state, menu state, pause state and game state)
-// vector of pending changes that get applied in the applyPendingChanges function in the state
 
 typedef struct PendingChangeArray
 {
