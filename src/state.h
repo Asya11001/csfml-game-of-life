@@ -4,23 +4,25 @@
 #include <SFML/Graphics/RenderWindow.h>
 
 #include "state_identifiers.h"
-#include "state_stack.h"
+#include <stdalign.h>
+
+struct StateStack;
 
 typedef struct Context
-{ 
+{
 	sfRenderWindow* m_window;
 } Context;
 
 typedef struct State
 {
 	Context m_context;
-	StateStack* m_stateStack;
+	struct StateStack* m_stateStack;
 } State;
 
-State createState(Context context, StateStack* stateStack);
+State createState(Context context, struct StateStack* stateStack);
 Context createContext(sfRenderWindow* window);
 
-void requestStackPush(State* state, StateId id);
+void requestStackPush(State* state, enum StateId id);
 void requestStackPop(State* state);
 void requestStackClear(State* state);
 
