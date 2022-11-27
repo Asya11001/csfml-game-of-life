@@ -10,11 +10,11 @@ typedef struct PendingChangeArray
 	PendingChange* m_data;
 } PendingChangeArray;
 
-PendingChangeArray pendingChangeArray_create();
-void pendingChangeArray_destroy(PendingChangeArray* pendingChangeArray);
+PendingChangeArray pendingChangeArrayCreate();
+void pendingChangeArrayDestroy(PendingChangeArray* pendingChangeArray);
 
-void pendingChangeArray_push_back(PendingChangeArray* pendingChangeArray, PendingChange* change);
-void pendingChangeArray_clear(PendingChangeArray* pendingChangeArray);
+void pendingChangeArrayPushBack(PendingChangeArray* pendingChangeArray, PendingChange* change);
+void pendingChangeArrayClear(PendingChangeArray* pendingChangeArray);
 
 typedef struct StateArray
 {
@@ -23,11 +23,11 @@ typedef struct StateArray
 	State** m_data;
 } StateArray;
 
-StateArray stateArray_create();
-void stateArray_destroy(StateArray* stateArray);
+StateArray stateArrayCreate();
+void stateArrayDestroy(StateArray* stateArray);
 
-void stateArray_push_back(StateArray* stateArray, State* state);
-void stateArray_pop_back(StateArray* stateArray);
-void stateArray_clear(StateArray* stateArray);
+void stateArrayPushBack(StateArray* stateArray, State* state);
+void stateArrayPopBack(StateArray* stateArray);
+void stateArrayClear(StateArray* stateArray);
 
 #endif

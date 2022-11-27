@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-PendingChangeArray pendingChangeArray_create()
+PendingChangeArray pendingChangeArrayCreate()
 {
 	PendingChangeArray pendingChangeArray;
 	pendingChangeArray.m_length = 0;
@@ -12,12 +12,12 @@ PendingChangeArray pendingChangeArray_create()
 	return pendingChangeArray;
 }
 
-void pendingChangeArray_destroy(PendingChangeArray* pendingChangeArray)
+void pendingChangeArrayDestroy(PendingChangeArray* pendingChangeArray)
 {
 	free(pendingChangeArray->m_data);
 }
 
-void pendingChangeArray_push_back(PendingChangeArray* pendingChangeArray, PendingChange* change)
+void pendingChangeArrayPushBack(PendingChangeArray* pendingChangeArray, PendingChange* change)
 {
 	int length = pendingChangeArray->m_length;
 
@@ -35,14 +35,14 @@ void pendingChangeArray_push_back(PendingChangeArray* pendingChangeArray, Pendin
 	++pendingChangeArray->m_length;
 }
 
-void pendingChangeArray_clear(PendingChangeArray* pendingChangeArray)
+void pendingChangeArrayClear(PendingChangeArray* pendingChangeArray)
 {
 	free(pendingChangeArray->m_data);
 	pendingChangeArray->m_data = NULL;
 	pendingChangeArray->m_length = 0;
 }
 
-StateArray stateArray_create()
+StateArray stateArrayCreate()
 {
 	StateArray stateArray;
 	stateArray.m_length = 0;
@@ -51,12 +51,12 @@ StateArray stateArray_create()
 	return stateArray;
 }
 
-void stateArray_destroy(StateArray* stateArray)
+void stateArrayDestroy(StateArray* stateArray)
 {
 	free(stateArray->m_data);
 }
 
-void stateArray_push_back(StateArray* stateArray, State* state)
+void stateArrayPushBack(StateArray* stateArray, State* state)
 {
 	int length = stateArray->m_length;
 	// create new array one element larger than the old one
@@ -75,13 +75,13 @@ void stateArray_push_back(StateArray* stateArray, State* state)
 	++stateArray->m_length;
 }
 
-void stateArray_pop_back(StateArray* stateArray)
+void stateArrayPopBack(StateArray* stateArray)
 {
 	int length = stateArray->m_length;
 
 	if (length == 1)
 	{
-		stateArray_clear(stateArray);
+		stateArrayClear(stateArray);
 		return;
 	}
 
@@ -97,7 +97,7 @@ void stateArray_pop_back(StateArray* stateArray)
 	--stateArray->m_length;
 }
 
-void stateArray_clear(StateArray* stateArray)
+void stateArrayClear(StateArray* stateArray)
 {
 	free(stateArray->m_data);
 	stateArray->m_data = NULL;
