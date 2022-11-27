@@ -1,8 +1,9 @@
 #ifndef STATE_STACK_STRUCTURE_H
 #define STATE_STACK_STRUCTURE_H
 
-#include "state_identifiers.h"
 #include "state.h"
+#include "state_auxiliary_structures.h"
+#include "state_identifiers.h"
 
 typedef enum Action
 {
@@ -19,7 +20,8 @@ typedef struct PendingChange
 
 typedef struct StateStack
 {
-
+	StateArray m_stateStack;
+	PendingChangeArray m_pendingList;
 } StateStack;
 
 void update(StateStack* stateStack);
