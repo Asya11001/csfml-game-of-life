@@ -34,3 +34,15 @@ static void applyPendingChanges(StateStack* stateStack)
 {
 
 }
+
+PendingChange pendingChangeCreate(Action action, StateId id)
+{
+	PendingChange pendingChange = { .action = action, .id = id };
+	return pendingChange;
+}
+
+PendingChange pendingChangeCreateDefaultStateId(Action action)
+{
+	PendingChange pendingChange = { .action = action, .id = none };
+	return pendingChange;
+}

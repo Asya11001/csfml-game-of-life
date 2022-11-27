@@ -18,6 +18,9 @@ typedef struct PendingChange
 	StateId id;
 } PendingChange;
 
+PendingChange pendingChangeCreate(Action action, StateId id);
+PendingChange pendingChangeCreateDefaultStateId(Action action);
+
 typedef struct StateStack
 {
 	StateArray m_stateStack;
