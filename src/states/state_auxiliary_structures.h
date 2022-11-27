@@ -18,8 +18,11 @@ typedef struct PendingChangeArray
 typedef struct StateArray
 {
 	int m_length;
-	State* m_data;
+	// array of pointers
+	State** m_data;
 } StateArray;
+
+StateArray stateArray_create();
 
 void stateArray_push_back(StateArray* stateArray, State* state);
 void stateArray_pop_back(StateArray* stateArray);
