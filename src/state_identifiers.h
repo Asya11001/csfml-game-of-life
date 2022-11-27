@@ -1,13 +1,13 @@
 #ifndef STATE_IDENTIFIERS_H
 #define STATE_IDENTIFIERS_H
 
-enum StateId
+typedef enum StateId
 {
 	none,
 	title,
 	menu,
 	pause,
 	game
-};
+} StateId;
 
 #endif
