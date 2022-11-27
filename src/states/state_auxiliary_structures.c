@@ -2,6 +2,26 @@
 
 #include <stdlib.h>
 
+PendingChangeArray pendingChangeArray_create()
+{
+
+}
+
+void pendingChangeArray_destroy(PendingChangeArray* pendingChangeArray)
+{
+
+}
+
+void pendingChangeArray_push_back(PendingChangeArray* pendingChangeArray, PendingChange* change)
+{
+
+}
+
+void pendingChangeArray_clear(PendingChangeArray* pendingChangeArray)
+{
+
+}
+
 StateArray stateArray_create()
 {
 	StateArray stateArray;

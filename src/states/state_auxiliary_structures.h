@@ -12,8 +12,15 @@ typedef struct PendingChange PendingChange;
 
 typedef struct PendingChangeArray
 {
-
+	int m_length;
+	PendingChange* m_data;
 } PendingChangeArray;
+
+PendingChangeArray pendingChangeArray_create();
+void pendingChangeArray_destroy(PendingChangeArray* pendingChangeArray);
+
+void pendingChangeArray_push_back(PendingChangeArray* pendingChangeArray, PendingChange* change);
+void pendingChangeArray_clear(PendingChangeArray* pendingChangeArray);
 
 typedef struct StateArray
 {
