@@ -3,17 +3,13 @@
 
 State createState(Context context, StateStack* stateStack)
 {
-	State state;
-	state.m_context = context;
-	state.m_stateStack = stateStack;
-
+	State state = { context, stateStack };
 	return state;
 }
 
 Context createContext(sfRenderWindow* window)
 {
-	Context context;
-	context.m_window = window;
+	Context context = { window };
 
 	return context;
 }

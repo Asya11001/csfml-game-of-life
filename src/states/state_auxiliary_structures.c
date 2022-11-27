@@ -5,10 +5,7 @@
 
 PendingChangeArray pendingChangeArrayCreate()
 {
-	PendingChangeArray pendingChangeArray;
-	pendingChangeArray.m_length = 0;
-	pendingChangeArray.m_data = NULL;
-
+	PendingChangeArray pendingChangeArray = { 0, NULL };
 	return pendingChangeArray;
 }
 
@@ -44,10 +41,7 @@ void pendingChangeArrayClear(PendingChangeArray* pendingChangeArray)
 
 StateArray stateArrayCreate()
 {
-	StateArray stateArray;
-	stateArray.m_length = 0;
-	stateArray.m_data = NULL;
-
+	StateArray stateArray = { 0, NULL };
 	return stateArray;
 }
 

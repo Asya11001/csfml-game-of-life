@@ -5,9 +5,7 @@ Application createApplication(void)
 	sfVideoMode mode = { 800, 600 };
 	sfRenderWindow* window = sfRenderWindow_create(mode, "game", sfDefaultStyle, NULL);
 
-	Application app;
-	app.m_window = window;
-
+	Application app = { window };
 	return app;
 }
 

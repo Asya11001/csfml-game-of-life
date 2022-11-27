@@ -18,14 +18,17 @@ typedef struct PendingChange
 	StateId id;
 } PendingChange;
 
-PendingChange pendingChangeCreate(Action action, StateId id);
-PendingChange pendingChangeCreateDefaultStateId(Action action);
+PendingChange createPendingChange(Action action, StateId id);
+PendingChange createPendingChangeDefaultStateId(Action action);
 
 typedef struct StateStack
 {
 	StateArray m_stateStack;
 	PendingChangeArray m_pendingList;
+	Context m_context;
 } StateStack;
+
+StateStack createStateStack(Context context);
 
 void update(StateStack* stateStack);
 void draw(StateStack* stateStack);
