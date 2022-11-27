@@ -31,15 +31,27 @@ void stateArray_push_back(StateArray* stateArray, State* state)
 
 void stateArray_pop_back(StateArray* stateArray)
 {
+	int length = stateArray->m_length;
 
+	if (length == 1)
+	{
+		stateArray_clear(stateArray);
+		return;
+	}
+
+	State** data = malloc((length - 1) * sizeof(State*));
+
+	for (int before = 0; before < length; ++before)
+	{
+		data[before] = stateArray->m_data[before];
+	}
+
+	free(stateArray->m_data);
+	stateArray->m_data = data;
+	--stateArray->m_length;
 }
 
 void stateArray_clear(StateArray* stateArray)
-{
-
-}
-
-void stateArray_resize(StateArray* stateArray, int newLength)
 {
 
 }
