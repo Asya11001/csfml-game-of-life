@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-PendingChangeArray pendingChangeArrayCreate()
+PendingChangeArray pendingChangeArrayCreate(void)
 {
 	PendingChangeArray pendingChangeArray = { 0, NULL };
 	return pendingChangeArray;
@@ -39,7 +39,7 @@ void pendingChangeArrayClear(PendingChangeArray* pendingChangeArray)
 	pendingChangeArray->m_length = 0;
 }
 
-StateArray stateArrayCreate()
+StateArray stateArrayCreate(void)
 {
 	StateArray stateArray = { 0, NULL };
 	return stateArray;
@@ -96,4 +96,24 @@ void stateArrayClear(StateArray* stateArray)
 	free(stateArray->m_data);
 	stateArray->m_data = NULL;
 	stateArray->m_length = 0;
+}
+
+StateFactoryMapArray stateFactoryMapArrayCreate(void)
+{
+
+}
+
+void stateFactoryMapArrayDestroy(StateFactoryMapArray* stateFactoryMapArray)
+{
+
+}
+
+void stateFactoryMapPush(StateFactoryMapArray* stateFactories, StateId id)
+{
+
+}
+
+StateFactoryMap find(StateFactoryMapArray* stateFactories, StateId id)
+{
+
 }
