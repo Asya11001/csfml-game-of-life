@@ -23,6 +23,7 @@ typedef struct StateArray
 } StateArray;
 
 StateArray stateArray_create();
+void stateArray_destroy(StateArray* stateArray);
 
 void stateArray_push_back(StateArray* stateArray, State* state);
 void stateArray_pop_back(StateArray* stateArray);

@@ -6,8 +6,14 @@ StateArray stateArray_create()
 {
 	StateArray stateArray;
 	stateArray.m_length = 0;
+	stateArray.m_data = NULL;
 
 	return stateArray;
+}
+
+void stateArray_destroy(StateArray* stateArray)
+{
+	free(stateArray->m_data);
 }
 
 void stateArray_push_back(StateArray* stateArray, State* state)
@@ -53,5 +59,7 @@ void stateArray_pop_back(StateArray* stateArray)
 
 void stateArray_clear(StateArray* stateArray)
 {
-
+	free(stateArray->m_data);
+	stateArray->m_data = NULL;
+	stateArray->m_length = 0;
 }
