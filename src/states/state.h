@@ -5,6 +5,8 @@
 #include <SFML/System/Time.h>
 #include <SFML/Window/Event.h>
 
+#include <stdbool.h>
+
 #include "state_identifiers.h"
 
 typedef struct StateStack StateStack;
@@ -25,6 +27,10 @@ typedef struct State
 	void (*requestStackPush)(State* state, StateId id);
 	void (*requestStackPop)(State* state);
 	void (*requestStackClear)(State* state);
+
+	void (*draw)(State* state);
+	bool (*update)(State* state, sfTime deltaTime);
+	bool (*handleEvent)(State* state, const sfEvent* event);
 } State;
 
 State* createNewState(StateStack* stateStack, Context context);

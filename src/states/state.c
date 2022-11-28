@@ -38,3 +38,8 @@ void requestStackClear(State* state)
 {
 	clearState(state->m_stateStack);
 }
+
+Context getContext(State* state)
+{
+	return state->m_context;
+}
