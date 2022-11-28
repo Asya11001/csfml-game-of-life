@@ -1,5 +1,5 @@
-#ifndef STATE_STACK_STRUCTURE_H
-#define STATE_STACK_STRUCTURE_H
+#ifndef	STATE_STACK_H
+#define STATE_STACK_H
 
 #include <stdbool.h>
 
@@ -34,9 +34,9 @@ StateStack createStateStack(Context context);
 
 State* createStatePtr(StateStack* stateStack, StateId id);
 
-void update(StateStack* stateStack);
-void draw(StateStack* stateStack);
-void handleEvent(StateStack* stateStack);
+void updateStateStack(StateStack* stateStack, sfTime deltaTime);
+void drawStateStack(StateStack* stateStack);
+void handleStateStackEvent(StateStack* stateStack, const sfEvent* event);
 
 void pushState(StateStack* stateStack, StateId id);
 void popState(StateStack* stateStack);

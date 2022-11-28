@@ -29,34 +29,59 @@ State* createStatePtr(StateStack* stateStack, StateId id)
 	}
 }
 
-void update(StateStack* stateStack)
+void updateStateStack(StateStack* stateStack, sfTime deltaTime)
 {
+	// update from highest state to lowest
+	int numberOfStates = stateStack->m_stack.m_length - 1;
+	for (int i = numberOfStates; i >= 0; --i)
+	{
+		State* state = stateArrayGet(&stateStack->m_stack, i);
+		if (!state->update(state, deltaTime))
+			return;
+	}
 
+	applyPendingChanges(stateStack);
 }
 
-void draw(StateStack* stateStack)
+void drawStateStack(StateStack* stateStack)
 {
-
+	// the first state to be drawn is the oldest (lowest) one
+	for (int i = 0; i < stateStack->m_stack.m_length; ++i)
+	{
+		State* state = stateArrayGet(&stateStack->m_stack, i);
+		state->draw(state);
+	}
 }
 
-void handleEvent(StateStack* stateStack)
+void handleStateStackEvent(StateStack* stateStack, const sfEvent* event)
 {
+	int numberOfStates = stateStack->m_stack.m_length - 1;
+	for (int i = numberOfStates; i >= 0; --i)
+	{
+		State* state = stateArrayGet(&stateStack->m_stack, i);
+		if (!state->handleEvent(state, event))
+			return;
+	}
 
+	applyPendingChanges(stateStack);
 }
 
 void pushState(StateStack* stateStack, StateId id)
 {
-
+	PendingChange change = createPendingChange(push, id);
+	pendingChangeArrayPushBack(&stateStack->m_pendingList, &change);
 }
 
 void popState(StateStack* stateStack)
 {
-
+	PendingChange change = createPendingChangeDefaultStateId(pop);
+	pendingChangeArrayPushBack(&stateStack->m_pendingList, &change);
 }
 
 void clearState(StateStack* stateStack)
 {
-
+	PendingChange change = createPendingChangeDefaultStateId(clear);
+	pendingChangeArrayPushBack(&stateStack->m_pendingList, &change);
 }
 
 bool isEmpty(StateStack* stateStack)
