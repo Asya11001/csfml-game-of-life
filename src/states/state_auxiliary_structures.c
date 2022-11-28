@@ -1,6 +1,7 @@
 #include "state_auxiliary_structures.h"
 #include "state_stack.h"
 
+#include <assert.h>
 #include <stdlib.h>
 
 PendingChangeArray pendingChangeArrayCreate(void)
@@ -37,6 +38,13 @@ void pendingChangeArrayClear(PendingChangeArray* pendingChangeArray)
 	free(pendingChangeArray->m_data);
 	pendingChangeArray->m_data = NULL;
 	pendingChangeArray->m_length = 0;
+}
+
+PendingChange pendingChangeArrayGet(const PendingChangeArray* pendingChangeArray, int index)
+{
+	assert(index >= 0 && index < pendingChangeArray->m_length && "invalid index pendingchangearr");
+
+	return pendingChangeArray->m_data[index];
 }
 
 StateArray stateArrayCreate(void)
@@ -96,24 +104,4 @@ void stateArrayClear(StateArray* stateArray)
 	free(stateArray->m_data);
 	stateArray->m_data = NULL;
 	stateArray->m_length = 0;
-}
-
-StateFactoryMapArray stateFactoryMapArrayCreate(void)
-{
-
-}
-
-void stateFactoryMapArrayDestroy(StateFactoryMapArray* stateFactoryMapArray)
-{
-
-}
-
-void stateFactoryMapPush(StateFactoryMapArray* stateFactories, StateId id)
-{
-
-}
-
-StateFactoryMap find(StateFactoryMapArray* stateFactories, StateId id)
-{
-
 }

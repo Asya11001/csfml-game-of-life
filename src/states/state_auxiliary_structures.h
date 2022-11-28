@@ -17,6 +17,7 @@ void pendingChangeArrayDestroy(PendingChangeArray* pendingChangeArray);
 
 void pendingChangeArrayPushBack(PendingChangeArray* pendingChangeArray, PendingChange* change);
 void pendingChangeArrayClear(PendingChangeArray* pendingChangeArray);
+PendingChange pendingChangeArrayGet(const PendingChangeArray* pendingChangeArray, int index);
 
 typedef struct StateArray
 {
@@ -37,7 +38,7 @@ typedef struct StateFactoryMap
 	// key
 	StateId m_id;
 	// value
-	State* (*m_factory)();
+	State* (*m_factory)(void);
 } StateFactoryMap;
 
 typedef struct StateFactoryMapArray
