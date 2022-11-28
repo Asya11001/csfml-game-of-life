@@ -1,16 +1,26 @@
 #include "state.h"
 #include "state_stack.h"
 
-State createState(Context context, StateStack* stateStack)
+#include <stdlib.h>
+
+State* createNewState(StateStack* stateStack, Context context)
 {
-	State state = { context, stateStack };
+	State* state = malloc(sizeof(State));
+	// point to itself since we are creating the base struct object
+	state->m_derived = state;
+	state->m_stateStack = stateStack;
+	state->m_context = context;
+
+	state->requestStackPush = requestStackPush;
+	state->requestStackPop = requestStackPop;
+	state->requestStackClear = requestStackClear;
+
 	return state;
 }
 
 Context createContext(sfRenderWindow* window)
 {
 	Context context = { window };
-
 	return context;
 }
 

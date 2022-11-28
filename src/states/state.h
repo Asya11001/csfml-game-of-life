@@ -7,7 +7,9 @@
 
 #include "state_identifiers.h"
 
-struct StateStack;
+typedef struct StateStack StateStack;
+typedef enum StateId StateId;
+typedef struct State State;
 
 typedef struct Context
 {
@@ -16,19 +18,19 @@ typedef struct Context
 
 typedef struct State
 {
+	void* m_derived;
 	Context m_context;
-	struct StateStack* m_stateStack;
+	StateStack* m_stateStack;
 
-	// abstract functions
-	void (*draw)(void);
-	void (*update)(sfTime deltaTime);
-	void (*handleEvent)(const sfEvent* event);
+	void (*requestStackPush)(State* state, StateId id);
+	void (*requestStackPop)(State* state);
+	void (*requestStackClear)(State* state);
 } State;
 
-State createState(Context context, struct StateStack* stateStack);
+State* createNewState(StateStack* stateStack, Context context);
 Context createContext(sfRenderWindow* window);
 
-void requestStackPush(State* state, enum StateId id);
+void requestStackPush(State* state, StateId id);
 void requestStackPop(State* state);
 void requestStackClear(State* state);
 
