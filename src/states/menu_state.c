@@ -42,6 +42,10 @@ bool handleMenuStateEvent(State* menuState, const sfEvent* event)
 		menuState->requestStackPop(menuState);
 		menuState->requestStackPush(menuState, pause);
 	}
+	else if (event->type == sfEvtKeyPressed && event->key.code == sfKeyEscape)
+	{
+		menuState->requestStackClear(menuState);
+	}
 
 	return true;
 }
