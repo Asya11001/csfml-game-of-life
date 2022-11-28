@@ -1,5 +1,6 @@
 #include "state_stack.h"
 #include "title_state.h"
+#include "menu_state.h"
 
 #include <stdlib.h>
 
@@ -19,7 +20,10 @@ State* createStatePtr(StateStack* stateStack, StateId id)
 			return titleState;
 		}
 		case menu:
-			break;
+		{
+			State* menuState = createMenuState(stateStack, stateStack->m_context);
+			return menuState;
+		}
 		case pause:
 			break;
 		case game:
