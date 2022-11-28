@@ -30,17 +30,17 @@ void drawMenuState(State* menuState)
 	sfRenderWindow_drawCircleShape(context.m_window, circle, NULL);
 }
 
-bool udpateTitleState(State* titleState, sfTime deltaTime)
+bool udpateTitleState(State* menuState, sfTime deltaTime)
 {
 	return true;
 }
 
-bool handleTitleStateEvent(State* titleState, const sfEvent* event)
+bool handleTitleStateEvent(State* menuState, const sfEvent* event)
 {
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyP)
 	{
-		titleState->requestStackPop(titleState);
-		titleState->requestStackPush(titleState, pause);
+		menuState->requestStackPop(menuState);
+		menuState->requestStackPush(menuState, pause);
 	}
 
 	return true;
