@@ -1,6 +1,8 @@
 #include "state_stack.h"
 #include "title_state.h"
 #include "menu_state.h"
+#include "pause_state.h"
+#include "game_state.h"
 
 #include <stdlib.h>
 
@@ -25,11 +27,17 @@ State* createStateById(StateStack* stateStack, StateId id)
 			return menuState;
 		}
 		case pause:
-			break;
+		{
+			State* pauseState = createPauseState(stateStack, stateStack->m_context);
+			return pauseState;
+		}
 		case game:
-			break;
+		{
+			State* gameState = createGameState(stateStack, stateStack->m_context);
+			return gameState;
+		}
 		default:
-			break;
+			return createNewState(stateStack, stateStack->m_context);
 	}
 }
 

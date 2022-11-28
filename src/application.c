@@ -47,9 +47,6 @@ static void processInput(Application* app)
 
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(app->m_window);
-
-		if (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape)
-			sfRenderWindow_close(app->m_window);
 	}
 }
 

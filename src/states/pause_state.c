@@ -42,6 +42,11 @@ bool handlePauseStateEvent(State* pauseState, const sfEvent* event)
 		pauseState->requestStackPop(pauseState);
 		pauseState->requestStackPush(pauseState, game);
 	}
+	else if (event->type == sfEvtKeyPressed && event->key.code == sfKeyBackspace)
+	{
+		pauseState->requestStackPop(pauseState);
+		pauseState->requestStackPush(pauseState, menu);
+	}
 
 	return true;
 }
