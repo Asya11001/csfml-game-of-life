@@ -34,24 +34,4 @@ void stateArrayPopBack(StateArray* stateArray);
 void stateArrayClear(StateArray* stateArray);
 State* stateArrayGet(StateArray* stateArray, int index);
 
-typedef struct StateFactoryMap
-{
-	// key
-	StateId m_id;
-	// value
-	State* (*m_factory)(void);
-} StateFactoryMap;
-
-typedef struct StateFactoryMapArray
-{
-	int m_length;
-	StateFactoryMap* m_data;
-} StateFactoryMapArray;
-
-StateFactoryMapArray stateFactoryMapArrayCreate(void);
-void stateFactoryMapArrayDestroy(StateFactoryMapArray* stateFactoryMapArray);
-
-void stateFactoryMapPush(StateFactoryMapArray* stateFactories, StateId id);
-StateFactoryMap find(StateFactoryMapArray* stateFactories, StateId id);
-
 #endif
