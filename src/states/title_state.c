@@ -15,7 +15,7 @@ State* createTitleState(StateStack* stateStack, Context context)
 
 	// accessing derived class functions:
 	state->draw = drawTitleState;
-	state->update = udpateTitleState;
+	state->update = updateTitleState;
 	state->handleEvent = handleTitleStateEvent;
 	// todo: virtual destructor
 	return state;
@@ -30,7 +30,7 @@ void drawTitleState(State* titleState)
 	sfRenderWindow_drawCircleShape(context.m_window, circle, NULL);
 }
 
-bool udpateTitleState(State* titleState, sfTime deltaTime)
+bool updateTitleState(State* titleState, sfTime deltaTime)
 {
 	return true;
 }

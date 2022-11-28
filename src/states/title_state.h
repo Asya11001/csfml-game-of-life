@@ -21,7 +21,7 @@ State* createTitleState(StateStack* stateStack, Context context);
 void destroyTitleState(State* state);
 
 void drawTitleState(State* titleState);
-bool udpateTitleState(State* titleState, sfTime deltaTime);
+bool updateTitleState(State* titleState, sfTime deltaTime);
 bool handleTitleStateEvent(State* titleState, const sfEvent* event);
 
 #endif
