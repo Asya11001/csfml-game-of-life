@@ -15,7 +15,7 @@ void pendingChangeArrayDestroy(PendingChangeArray* pendingChangeArray)
 	free(pendingChangeArray->m_data);
 }
 
-void pendingChangeArrayPushBack(PendingChangeArray* pendingChangeArray, PendingChange* change)
+void pendingChangeArrayPushBack(PendingChangeArray* pendingChangeArray, const PendingChange* change)
 {
 	int length = pendingChangeArray->m_length;
 
@@ -42,7 +42,7 @@ void pendingChangeArrayClear(PendingChangeArray* pendingChangeArray)
 
 PendingChange pendingChangeArrayGet(const PendingChangeArray* pendingChangeArray, int index)
 {
-	assert(index >= 0 && index < pendingChangeArray->m_length && "invalid index pendingchangearr");
+	assert(index >= 0 && index < pendingChangeArray->m_length && "invalid index pendingChangeArr\n");
 
 	return pendingChangeArray->m_data[index];
 }
@@ -104,4 +104,11 @@ void stateArrayClear(StateArray* stateArray)
 	free(stateArray->m_data);
 	stateArray->m_data = NULL;
 	stateArray->m_length = 0;
+}
+
+State* stateArrayGet(StateArray* stateArray, int index)
+{
+	assert(index >= 0 && index < stateArray->m_length && "invalid index stateArray\n");
+
+	return stateArray->m_data[index];
 }

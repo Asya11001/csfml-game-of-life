@@ -15,7 +15,7 @@ typedef struct PendingChangeArray
 PendingChangeArray pendingChangeArrayCreate(void);
 void pendingChangeArrayDestroy(PendingChangeArray* pendingChangeArray);
 
-void pendingChangeArrayPushBack(PendingChangeArray* pendingChangeArray, PendingChange* change);
+void pendingChangeArrayPushBack(PendingChangeArray* pendingChangeArray, const PendingChange* change);
 void pendingChangeArrayClear(PendingChangeArray* pendingChangeArray);
 PendingChange pendingChangeArrayGet(const PendingChangeArray* pendingChangeArray, int index);
 
@@ -32,6 +32,7 @@ void stateArrayDestroy(StateArray* stateArray);
 void stateArrayPushBack(StateArray* stateArray, State* state);
 void stateArrayPopBack(StateArray* stateArray);
 void stateArrayClear(StateArray* stateArray);
+State* stateArrayGet(StateArray* stateArray, int index);
 
 typedef struct StateFactoryMap
 {
