@@ -14,16 +14,16 @@ typedef struct TitleState
 {
 	State* m_base;
 
-	void (*draw)(TitleState* titleState);
-	bool (*update)(TitleState* titleState, sfTime deltaTime);
-	bool (*handleEvent)(TitleState* titleState, const sfEvent* event);
+	void (*draw)(State* titleState);
+	bool (*update)(State* titleState, sfTime deltaTime);
+	bool (*handleEvent)(State* titleState, const sfEvent* event);
 } TitleState;
 
 State* createTitleState(StateStack* stateStack, Context context);
 void destroyTitleState(State* state);
 
-void drawTitleState(TitleState* titleState);
-bool udpateTitleState(TitleState* titleState, sfTime deltaTime);
-bool handleTitleStateEvent(TitleState* titleState, const sfEvent* event);
+void drawTitleState(State* titleState);
+bool udpateTitleState(State* titleState, sfTime deltaTime);
+bool handleTitleStateEvent(State* titleState, const sfEvent* event);
 
 #endif
