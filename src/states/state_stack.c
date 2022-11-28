@@ -10,7 +10,7 @@ StateStack createStateStack(Context context)
 	return stateStack;
 }
 
-State* createStatePtr(StateStack* stateStack, StateId id)
+State* createStateById(StateStack* stateStack, StateId id)
 {
 	switch (id)
 	{
@@ -70,25 +70,25 @@ void handleStateStackEvent(StateStack* stateStack, const sfEvent* event)
 	applyPendingChanges(stateStack);
 }
 
-void pushState(StateStack* stateStack, StateId id)
+void pushStateToStack(StateStack* stateStack, StateId id)
 {
 	PendingChange change = createPendingChange(push, id);
 	pendingChangeArrayPushBack(&stateStack->m_pendingList, &change);
 }
 
-void popState(StateStack* stateStack)
+void popStateFromStack(StateStack* stateStack)
 {
 	PendingChange change = createPendingChangeDefaultStateId(pop);
 	pendingChangeArrayPushBack(&stateStack->m_pendingList, &change);
 }
 
-void clearState(StateStack* stateStack)
+void clearStateStack(StateStack* stateStack)
 {
 	PendingChange change = createPendingChangeDefaultStateId(clear);
 	pendingChangeArrayPushBack(&stateStack->m_pendingList, &change);
 }
 
-bool isEmpty(StateStack* stateStack)
+bool isStateStackEmpty(StateStack* stateStack)
 {
 	return (stateStack->m_stack.m_length == 0);
 }
@@ -103,7 +103,7 @@ static void applyPendingChanges(StateStack* stateStack)
 		{
 			case push:
 			{
-				stateArrayPushBack(&stateStack->m_stack, createStatePtr(stateStack, change.id));
+				stateArrayPushBack(&stateStack->m_stack, createStateById(stateStack, change.id));
 				break;
 			}
 			case pop:

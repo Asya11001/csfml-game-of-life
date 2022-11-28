@@ -26,17 +26,17 @@ Context createContext(sfRenderWindow* window)
 
 void requestStackPush(State* state, StateId id)
 {
-	pushState(state->m_stateStack, id);
+	pushStateToStack(state->m_stateStack, id);
 }
 
 void requestStackPop(State* state)
 {
-	popState(state->m_stateStack);
+	popStateFromStack(state->m_stateStack);
 }
 
 void requestStackClear(State* state)
 {
-	clearState(state->m_stateStack);
+	clearStateStack(state->m_stateStack);
 }
 
 Context getContext(State* state)

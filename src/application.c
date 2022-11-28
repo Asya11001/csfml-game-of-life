@@ -14,7 +14,7 @@ Application createApplication(void)
 	StateStack stateStack = createStateStack(context);
 
 	Application app = { window, stateStack };
-	pushState(&app.m_stateStack, title);
+	pushStateToStack(&app.m_stateStack, title);
 	return app;
 }
 
@@ -25,11 +25,9 @@ void run(Application* app)
 	{
 		processInput(app);
 		updateApp(app, sfClock_restart(clock));
-		if (isEmpty(&app->m_stateStack))
+		if (isStateStackEmpty(&app->m_stateStack))
 		{
-			printf("stack is empty\n");
 			sfRenderWindow_close(app->m_window);
-			return;
 		}
 		render(app);
 	}
