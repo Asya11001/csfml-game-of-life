@@ -8,8 +8,6 @@
 
 #include "state_stack.h"
 
-typedef struct TitleState TitleState;
-
 typedef struct TitleState
 {
 	State* m_base;
