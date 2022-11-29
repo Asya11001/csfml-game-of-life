@@ -42,5 +42,17 @@ void updateGrid(Grid* grid)
 
 static void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size)
 {
-	
+	for (int row = 0; row < size; ++row)
+	{
+		for (int col = 0; col < size; ++col)
+		{
+			sfRectangleShape* rectangle = sfRectangleShape_create();
+			sfVector2f position = { row * 15 + 5, col * 15 + 5 };
+			sfRectangleShape_setPosition(rectangle, position);
+			sfVector2f size = { 10, 10 };
+			sfRectangleShape_setSize(rectangle, size);
+			sfRectangleShape_setFillColor(rectangle, sfWhite);
+			rectangles[row][col] = rectangle;
+		}
+	}
 }
