@@ -13,6 +13,9 @@ State* createGameState(StateStack* stateStack, Context context)
 
 	state->m_derived = gameState;
 
+	// initialize derived class memebers
+	gameState->m_grid = createGrid(10);
+
 	// virtual functions:
 	state->draw = drawGameState;
 	state->update = updateGameState;
@@ -23,11 +26,10 @@ State* createGameState(StateStack* stateStack, Context context)
 
 void drawGameState(State* gameState)
 {
-	sfCircleShape* circle = sfCircleShape_create();
-	sfCircleShape_setRadius(circle, 100.0f);
-	sfCircleShape_setFillColor(circle, sfMagenta);
-	Context context = getContext(gameState);
-	sfRenderWindow_drawCircleShape(context.m_window, circle, NULL);
+	sfRenderWindow* window = getContext(gameState).m_window;
+	// this is a nasty cast, i think it's necessary though
+	GameState* derivedPart = (GameState*)gameState->m_derived;
+	drawGrid(&derivedPart->m_grid, window);
 }
 
 bool updateGameState(State* gameState, sfTime deltaTime)
