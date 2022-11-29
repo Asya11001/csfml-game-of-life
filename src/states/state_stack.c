@@ -44,8 +44,8 @@ State* createStateById(StateStack* stateStack, StateId id)
 void updateStateStack(StateStack* stateStack, sfTime deltaTime)
 {
 	// update from highest state to lowest
-	int numberOfStates = stateStack->m_stack.m_length - 1;
-	for (int i = numberOfStates; i >= 0; --i)
+	int lastStateIndex = stateStack->m_stack.m_length - 1;
+	for (int i = lastStateIndex; i >= 0; --i)
 	{
 		State* state = stateArrayGet(&stateStack->m_stack, i);
 		if (!state->update(state, deltaTime))
@@ -67,8 +67,8 @@ void drawStateStack(StateStack* stateStack)
 
 void handleStateStackEvent(StateStack* stateStack, const sfEvent* event)
 {
-	int numberOfStates = stateStack->m_stack.m_length - 1;
-	for (int i = numberOfStates; i >= 0; --i)
+	int lastStateIndex = stateStack->m_stack.m_length - 1;
+	for (int i = lastStateIndex; i >= 0; --i)
 	{
 		State* state = stateArrayGet(&stateStack->m_stack, i);
 		if (!state->handleEvent(state, event))
