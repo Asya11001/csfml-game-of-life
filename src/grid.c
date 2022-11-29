@@ -40,6 +40,18 @@ void updateGrid(Grid* grid)
 
 }
 
+void drawGrid(Grid* grid, sfRenderWindow* window)
+{
+	int size = grid->m_currentSize;
+	for (int row = 0; row < size; ++row)
+	{
+		for (int col = 0; col < size; ++col)
+		{
+			sfRenderWindow_drawRectangleShape(window, grid->m_rectangles[row][col], NULL);
+		}
+	}
+}
+
 static void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size)
 {
 	for (int row = 0; row < size; ++row)
