@@ -5,13 +5,15 @@
 
 typedef struct Grid
 {
-	sfRectangleShape*** m_grid;
+	sfRectangleShape*** m_rectangles;
 	int m_currentSize;
 } Grid;
 
-void createGrid(int size);
+Grid createGrid(int size);
 
 void changeGridSize(Grid* grid, int newSize);
 void updateGrid(Grid* grid);
+
+static void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size);
 
 #endif
