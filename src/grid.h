@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics/RectangleShape.h>
 #include <SFML/Graphics/RenderWindow.h>
+#include <SFML/System/Time.h>
 
 typedef struct Grid
 {
@@ -10,12 +11,12 @@ typedef struct Grid
 	int m_currentSize;
 } Grid;
 
-Grid createGrid(int size);
+Grid* createNewGrid(int size);
 
 void changeGridSize(Grid* grid, int newSize);
 
-void updateGrid(Grid* grid);
-void drawGrid(Grid* grid, sfRenderWindow* window);
+void updateGrid(Grid* grid, sfTime deltaTime);
+void drawGrid(const Grid* grid, sfRenderWindow* window);
 
 static void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size);
 

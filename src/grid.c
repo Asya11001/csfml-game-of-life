@@ -2,8 +2,9 @@
 
 #include <stdlib.h>
 
-Grid createGrid(int size)
+Grid* createNewGrid(int size)
 {
+	Grid* grid = malloc(sizeof(Grid));
 	sfRectangleShape*** rectangles = malloc(size * sizeof(sfRectangleShape**));
 	for (int i = 0; i < size; ++i)
 	{
@@ -12,7 +13,9 @@ Grid createGrid(int size)
 
 	initializeRectangleMatrix(rectangles, size);
 
-	Grid grid = { rectangles, size };
+	grid->m_rectangles = rectangles;
+	grid->m_currentSize = size;
+
 	return grid;
 }
 
@@ -35,12 +38,12 @@ void changeGridSize(Grid* grid, int newSize)
 	initializeRectangleMatrix(newRectangles, newSize);
 }
 
-void updateGrid(Grid* grid)
+void updateGrid(Grid* grid, sfTime deltaTime)
 {
 
 }
 
-void drawGrid(Grid* grid, sfRenderWindow* window)
+void drawGrid(const Grid* grid, sfRenderWindow* window)
 {
 	int size = grid->m_currentSize;
 	for (int row = 0; row < size; ++row)
