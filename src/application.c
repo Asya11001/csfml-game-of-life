@@ -9,6 +9,7 @@ Application createApplication(void)
 {
 	sfVideoMode mode = { 800, 600 };
 	sfRenderWindow* window = sfRenderWindow_create(mode, "game", sfDefaultStyle, NULL);
+	sfRenderWindow_setFramerateLimit(window, 60);
 
 	Context context = createContext(window);
 	StateStack stateStack = createStateStack(context);
@@ -25,10 +26,12 @@ void run(Application* app)
 	{
 		processInput(app);
 		updateApp(app, sfClock_restart(clock));
+
 		if (isStateStackEmpty(&app->m_stateStack))
 		{
 			sfRenderWindow_close(app->m_window);
 		}
+
 		render(app);
 	}
 }
