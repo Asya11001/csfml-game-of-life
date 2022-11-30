@@ -8,13 +8,14 @@
 #include <stdbool.h>
 
 #include "state_stack.h"
+#include "state.h"
 #include "../grid.h"
 
 typedef struct GameState
 {
 	State* m_base;
 
-	Grid m_grid;
+	Grid* m_grid;
 
 	void (*draw)(State* gameState);
 	bool (*update)(State* gameState, sfTime deltaTime);
@@ -22,7 +23,7 @@ typedef struct GameState
 } GameState;
 
 State* createGameState(StateStack* stateStack, Context context);
-void destroyGameState(State* state);
+void deleteGameState(State* state);
 
 void drawGameState(State* gameState);
 bool updateGameState(State* gameState, sfTime deltaTime);
