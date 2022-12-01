@@ -23,6 +23,6 @@ void changeGridSize(Grid* grid, int newSize);
 void updateGrid(Grid* grid, sfTime deltaTime);
 void drawGrid(const Grid* grid, sfRenderWindow* window);
 
-static void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size);
+void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size);
 
 #endif

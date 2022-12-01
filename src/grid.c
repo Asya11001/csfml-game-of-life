@@ -26,6 +26,14 @@ void deleteGrid(Grid* grid)
 {
 	for (int i = 0; i < grid->m_currentSize; ++i)
 	{
+		for (int j = 0; j < grid->m_currentSize; ++j)
+		{
+			sfRectangleShape_destroy(grid->m_rectangles[i][j]);
+		}
+	}
+
+	for (int i = 0; i < grid->m_currentSize; ++i)
+	{
 		free(grid->m_rectangles[i]);
 	}
 	free(grid->m_rectangles);
@@ -84,7 +92,7 @@ void drawGrid(const Grid* grid, sfRenderWindow* window)
 	}
 }
 
-static void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size)
+void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size)
 {
 	for (int row = 0; row < size; ++row)
 	{
@@ -94,8 +102,8 @@ static void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size)
 			int coordinate = rand() % 31 + 5;
 			sfVector2f position = { row * coordinate + 5, col * coordinate  + 5 };
 			sfRectangleShape_setPosition(rectangle, position);
-			sfVector2f size = { 10, 10 };
-			sfRectangleShape_setSize(rectangle, size);
+			sfVector2f sizes = { 10, 10 };
+			sfRectangleShape_setSize(rectangle, sizes);
 			sfRectangleShape_setFillColor(rectangle, sfWhite);
 			rectangles[row][col] = rectangle;
 		}
