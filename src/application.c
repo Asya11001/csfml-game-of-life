@@ -7,7 +7,7 @@
 
 Application createApplication(void)
 {
-	sfVideoMode mode = { 800, 600 };
+	sfVideoMode mode = { 800, 600, 32 };
 	sfRenderWindow* window = sfRenderWindow_create(mode, "game", sfDefaultStyle, NULL);
 	sfRenderWindow_setFramerateLimit(window, 60);
 
@@ -34,14 +34,17 @@ void run(Application* app)
 
 		render(app);
 	}
+
+	sfClock_destroy(clock);
+	sfRenderWindow_destroy(app->m_window);
 }
 
-static void updateApp(Application* app, sfTime deltaTime)
+void updateApp(Application* app, sfTime deltaTime)
 {
 	updateStateStack(&app->m_stateStack, deltaTime);
 }
 
-static void processInput(Application* app)
+void processInput(Application* app)
 {
 	sfEvent event;
 	while (sfRenderWindow_pollEvent(app->m_window, &event))
@@ -53,7 +56,7 @@ static void processInput(Application* app)
 	}
 }
 
-static void render(Application* app)
+void render(Application* app)
 {
 	sfRenderWindow_clear(app->m_window, sfBlack);
 
