@@ -1,5 +1,9 @@
 #include "state_auxiliary_structures.h"
 #include "state_stack.h"
+#include "title_state.h"
+#include "menu_state.h"
+#include "pause_state.h"
+#include "game_state.h"
 
 #include <assert.h>
 #include <stdlib.h>
@@ -72,6 +76,12 @@ void stateArrayPushBack(StateArray* stateArray, State* state)
 
 	data[length] = state;
 
+	// free all of the state memory:
+	for (int i = 0; i < length; ++i)
+	{
+		stateArray->m_data[i]->deleteState(stateArray->m_data[i]);
+	}
+
 	free(stateArray->m_data);
 	stateArray->m_data = data;
 	++stateArray->m_length;
@@ -89,9 +99,15 @@ void stateArrayPopBack(StateArray* stateArray)
 
 	State** data = malloc((length - 1) * sizeof(State*));
 
-	for (int before = 0; before < length; ++before)
+	for (int before = 0; before < length - 1; ++before)
 	{
 		data[before] = stateArray->m_data[before];
+	}
+
+	// free the state memory that the array points to:
+	for (int i = 0; i < length; ++i)
+	{
+		stateArray->m_data[i]->deleteState(stateArray->m_data[i]);
 	}
 
 	free(stateArray->m_data);
@@ -101,6 +117,8 @@ void stateArrayPopBack(StateArray* stateArray)
 
 void stateArrayClear(StateArray* stateArray)
 {
+	stateArray->m_data[0]->deleteState(stateArray->m_data[0]);
+
 	free(stateArray->m_data);
 	stateArray->m_data = NULL;
 	stateArray->m_length = 0;
