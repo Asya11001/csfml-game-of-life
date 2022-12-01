@@ -12,15 +12,17 @@ typedef struct Grid
 	sfRectangleShape*** m_rectangles;
 	int m_currentSize;
 	sfTime m_elapsedTime;
-	bool m_blueColor;
 } Grid;
 
 Grid* createNewGrid(int size);
 void deleteGrid(Grid* grid);
 
-void changeGridSize(Grid* grid, int newSize);
-
 void updateGrid(Grid* grid, sfTime deltaTime);
+void updateGridLogic(Grid* grid);
+void updateAliveCell(sfRectangleShape* old, sfRectangleShape* new);
+void updateDeadCell(sfRectangleShape* old, sfRectangleShape* new);
+bool isAlive(sfRectangleShape* cell);
+
 void drawGrid(const Grid* grid, sfRenderWindow* window);
 
 void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size);

@@ -1,6 +1,8 @@
 #include "grid.h"
+#include "util.h"
 
-#include <time.h>
+#include <SFML/Graphics/Color.h>
+
 #include <stdlib.h>
 
 Grid* createNewGrid(int size)
@@ -17,7 +19,6 @@ Grid* createNewGrid(int size)
 	grid->m_rectangles = rectangles;
 	grid->m_currentSize = size;
 	grid->m_elapsedTime = sfTime_Zero;
-	grid->m_blueColor = false;
 
 	return grid;
 }
@@ -42,33 +43,13 @@ void deleteGrid(Grid* grid)
 	grid = NULL;
 }
 
-void changeGridSize(Grid* grid, int newSize)
-{
-	for (int i = 0; i < grid->m_currentSize; ++i)
-	{
-		free(grid->m_rectangles[i]);
-		grid->m_rectangles[i] = NULL;
-	}
-	free(grid->m_rectangles);
-	grid->m_rectangles = NULL;
-
-	sfRectangleShape*** newRectangles = malloc(newSize * sizeof(sfRectangleShape**));
-	for (int i = 0; i < newSize; ++i)
-	{
-		newRectangles[i] = malloc(newSize * sizeof(sfRectangleShape*));
-	}
-
-	initializeRectangleMatrix(newRectangles, newSize);
-}
-
 void updateGrid(Grid* grid, sfTime deltaTime)
 {
 	grid->m_elapsedTime.microseconds += deltaTime.microseconds;
 
 	if (grid->m_elapsedTime.microseconds >= sfSeconds(1.0f).microseconds)
 	{
-		grid->m_blueColor = !grid->m_blueColor;
-		grid->m_elapsedTime = sfTime_Zero;
+		updateGridLogic(grid);
 	}
 }
 
@@ -79,14 +60,6 @@ void drawGrid(const Grid* grid, sfRenderWindow* window)
 	{
 		for (int col = 0; col < size; ++col)
 		{
-			if (grid->m_blueColor)
-			{
-				sfRectangleShape_setFillColor(grid->m_rectangles[row][col], sfBlue);
-			}
-			else
-			{
-				sfRectangleShape_setFillColor(grid->m_rectangles[row][col], sfWhite);
-			}
 			sfRenderWindow_drawRectangleShape(window, grid->m_rectangles[row][col], NULL);
 		}
 	}
@@ -99,8 +72,7 @@ void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size)
 		for (int col = 0; col < size; ++col)
 		{
 			sfRectangleShape* rectangle = sfRectangleShape_create();
-			int coordinate = rand() % 31 + 5;
-			sfVector2f position = { row * coordinate + 5, col * coordinate  + 5 };
+			sfVector2f position = { row * 15 + 5, col * 15 + 5 };
 			sfRectangleShape_setPosition(rectangle, position);
 			sfVector2f sizes = { 10, 10 };
 			sfRectangleShape_setSize(rectangle, sizes);
@@ -108,4 +80,48 @@ void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size)
 			rectangles[row][col] = rectangle;
 		}
 	}
+}
+
+void updateGridLogic(Grid* grid)
+{
+	// create new rectangle grid
+	sfRectangleShape*** newRectangles = malloc(grid->m_currentSize * sizeof(sfRectangleShape**));
+	for (int i = 0; i < grid->m_currentSize; ++i)
+	{
+		newRectangles[i] = malloc(grid->m_currentSize* sizeof(sfRectangleShape*));
+	}
+
+	// check the game logic
+	for (int row = 0; row < grid->m_currentSize; ++row)
+	{
+		for (int col = 0; col < grid->m_currentSize; ++col)
+		{
+			sfRectangleShape* cell = grid->m_rectangles[row][col];
+			sfRectangleShape* newCell = newRectangles[row][col];
+			if (isAlive(cell))
+			{
+				updateAliveCell(cell, newCell);
+			}
+			else
+			{
+				updateDeadCell(cell, newCell);
+			}
+		}
+	}
+}
+
+void updateAliveCell(sfRectangleShape* old, sfRectangleShape* new)
+{
+
+}
+
+void updateDeadCell(sfRectangleShape* old, sfRectangleShape* new)
+{
+
+}
+
+bool isAlive(sfRectangleShape* cell)
+{
+	sfColor cellColor = sfRectangleShape_getFillColor(cell);
+	return (colorsAreEqual(&cellColor, &sfWhite));
 }
