@@ -101,7 +101,7 @@ bool isStateStackEmpty(StateStack* stateStack)
 	return (stateStack->m_stack.m_length == 0);
 }
 
-static void applyPendingChanges(StateStack* stateStack)
+void applyPendingChanges(StateStack* stateStack)
 {
 	int numberOfChanges = stateStack->m_pendingList.m_length;
 	for (int i = 0; i < numberOfChanges; ++i)

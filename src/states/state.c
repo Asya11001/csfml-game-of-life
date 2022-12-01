@@ -2,6 +2,7 @@
 #include "state_stack.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 State* createNewState(StateStack* stateStack, Context context)
 {

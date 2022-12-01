@@ -17,8 +17,20 @@ State* createTitleState(StateStack* stateStack, Context context)
 	state->draw = drawTitleState;
 	state->update = updateTitleState;
 	state->handleEvent = handleTitleStateEvent;
-	// todo: virtual destructor
+
+	// virtual destructor:
+	state->deleteState = deleteTitleState;
+
 	return state;
+}
+
+void deleteTitleState(State* state)
+{
+	// derived destructor:
+	TitleState* derivedPart = (TitleState*)state->m_derived;
+	free(derivedPart);
+	// base destructor:
+	deleteState(state);
 }
 
 void drawTitleState(State* titleState)
@@ -28,6 +40,7 @@ void drawTitleState(State* titleState)
 	sfCircleShape_setFillColor(circle, sfBlue);
 	Context context = getContext(titleState);
 	sfRenderWindow_drawCircleShape(context.m_window, circle, NULL);
+	sfCircleShape_destroy(circle);
 }
 
 bool updateTitleState(State* titleState, sfTime deltaTime)
