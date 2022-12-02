@@ -13,7 +13,7 @@ State* createPauseState(StateStack* stateStack, Context context)
 
 	state->m_derived = pauseState;
 
-	pauseState->m_grid = createNewGrid(10);
+	pauseState->m_grid = context.m_grid;
 
 	// virtual functions:
 	state->draw = drawPauseState;
@@ -30,7 +30,7 @@ void deletePauseState(State* state)
 {
 	// derived destructor:
 	PauseState* derivedPart = (PauseState*)state->m_derived;
-	deleteGrid(derivedPart->m_grid);
+	//deleteGrid(derivedPart->m_grid);
 	free(derivedPart);
 	// base destructor:
 	deleteState(state);
@@ -52,12 +52,13 @@ bool handlePauseStateEvent(State* pauseState, const sfEvent* event)
 {
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyEscape)
 	{
-		// removing this might cause bad memory access
 		pauseState->requestStackPop(pauseState);
 		pauseState->requestStackPush(pauseState, game);
 	}
 	else if (event->type == sfEvtKeyPressed && event->key.code == sfKeyBackspace)
 	{
+		resetGridCellColors(pauseState->m_context.m_grid->m_cells,
+				pauseState->m_context.m_grid->m_currentSize);
 		pauseState->requestStackPop(pauseState);
 		pauseState->requestStackPush(pauseState, menu);
 	}

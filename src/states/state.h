@@ -8,15 +8,16 @@
 #include <stdbool.h>
 
 #include "state_identifiers.h"
+#include "../grid.h"
 
 typedef struct StateStack StateStack;
-typedef enum StateId StateId;
 typedef struct State State;
 
 typedef struct Context
 {
-	// to-do: add grid here
 	sfRenderWindow* m_window;
+	// for game and pause states
+	Grid* m_grid;
 } Context;
 
 typedef struct State
@@ -39,7 +40,7 @@ typedef struct State
 State* createNewState(StateStack* stateStack, Context context);
 void deleteState(State* state);
 
-Context createContext(sfRenderWindow* window);
+Context createContext(sfRenderWindow* window, Grid* grid);
 
 void requestStackPush(State* state, StateId id);
 void requestStackPop(State* state);

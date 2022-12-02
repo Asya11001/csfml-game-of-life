@@ -92,6 +92,26 @@ void initializeCellMatrix(sfRectangleShape*** cells, int size)
 	}
 }
 
+void resetGridCellColors(sfRectangleShape*** cells, int size)
+{
+	for (int row = 0; row < size; ++row)
+	{
+		for (int col = 0; col < size; ++col)
+		{
+			sfRectangleShape* cell = cells[row][col];
+			if (row == 0 && col == 1 || row == 1 && col == 2 || row == 2 && col == 0 ||
+				row == 2 && col == 1 || row == 2 && col == 2)
+			{
+				sfRectangleShape_setFillColor(cell, sfWhite);
+			}
+			else
+			{
+				sfRectangleShape_setFillColor(cell, sfGreen);
+			}
+		}
+	}
+}
+
 sfRectangleShape*** allocateAndInitializeCells(int size)
 {
 	sfRectangleShape*** cells = malloc(size * sizeof(sfRectangleShape**));

@@ -1,4 +1,5 @@
 #include "application.h"
+#include "grid.h"
 
 #include <SFML/Window/Event.h>
 #include <SFML/System/Clock.h>
@@ -11,7 +12,9 @@ Application createApplication(void)
 	sfRenderWindow* window = sfRenderWindow_create(mode, "game", sfDefaultStyle, NULL);
 	sfRenderWindow_setFramerateLimit(window, 60);
 
-	Context context = createContext(window);
+	Grid* grid = createNewGrid(20);
+
+	Context context = createContext(window, grid);
 	StateStack stateStack = createStateStack(context);
 
 	Application app = { window, stateStack };

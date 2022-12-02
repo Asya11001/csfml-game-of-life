@@ -28,9 +28,9 @@ void deleteState(State* state)
 	state = NULL;
 }
 
-Context createContext(sfRenderWindow* window)
+Context createContext(sfRenderWindow* window, Grid* grid)
 {
-	Context context = { window };
+	Context context = { window, grid };
 	return context;
 }
 

@@ -14,7 +14,7 @@ State* createGameState(StateStack* stateStack, Context context)
 	state->m_derived = gameState;
 
 	// initialize derived class memebers
-	gameState->m_grid = createNewGrid(10);
+	gameState->m_grid = context.m_grid;
 
 	// virtual functions:
 	state->draw = drawGameState;
@@ -31,7 +31,7 @@ void deleteGameState(State* state)
 {
 	// derived destructor
 	GameState* derivedPart = (GameState*)state->m_derived;
-	deleteGrid(derivedPart->m_grid);
+	//deleteGrid(derivedPart->m_grid);
 	free(derivedPart);
 	// base destructor
 	deleteState(state);

@@ -32,4 +32,7 @@ void drawGrid(const Grid* grid, sfRenderWindow* window);
 void initializeCellMatrix(sfRectangleShape*** cells, int size);
 sfRectangleShape*** allocateAndInitializeCells(int size);
 
+// reset to the image that is displayed on first launch
+void resetGridCellColors(sfRectangleShape*** cells, int size);
+
 #endif
