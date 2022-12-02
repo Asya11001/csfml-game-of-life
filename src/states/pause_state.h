@@ -7,10 +7,13 @@
 #include <stdbool.h>
 
 #include "state_stack.h"
+#include "../grid.h"
 
 typedef struct PauseState
 {
 	State* m_base;
+
+	Grid* m_grid;
 
 	void (*draw)(State* pauseState);
 	bool (*update)(State* pauseState, sfTime deltaTime);
@@ -18,7 +21,7 @@ typedef struct PauseState
 } PauseState;
 
 State* createPauseState(StateStack* stateStack, Context context);
-void destroyPauseState(State* state);
+void deletePauseState(State* state);
 
 void drawPauseState(State* pauseState);
 bool updatePauseState(State* pauseState, sfTime deltaTime);

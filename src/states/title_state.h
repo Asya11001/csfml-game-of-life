@@ -18,7 +18,7 @@ typedef struct TitleState
 } TitleState;
 
 State* createTitleState(StateStack* stateStack, Context context);
-void destroyTitleState(State* state);
+void deleteTitleState(State* state);
 
 void drawTitleState(State* titleState);
 bool updateTitleState(State* titleState, sfTime deltaTime);

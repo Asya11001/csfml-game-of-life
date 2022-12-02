@@ -18,7 +18,7 @@ typedef struct MenuState
 } MenuState;
 
 State* createMenuState(StateStack* stateStack, Context context);
-void destroyMenuState(State* state);
+void deleteMenuState(State* state);
 
 void drawMenuState(State* menuState);
 bool updateMenuState(State* menuState, sfTime deltaTime);

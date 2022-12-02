@@ -45,6 +45,6 @@ void clearStateStack(StateStack* stateStack);
 bool isStateStackEmpty(StateStack* stateStack);
 
 // to avoid changing the state stack during its update or iteration
-static void applyPendingChanges(StateStack* stateStack);
+void applyPendingChanges(StateStack* stateStack);
 
 #endif

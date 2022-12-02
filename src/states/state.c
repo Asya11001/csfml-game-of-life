@@ -2,6 +2,7 @@
 #include "state_stack.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 State* createNewState(StateStack* stateStack, Context context)
 {
@@ -15,7 +16,16 @@ State* createNewState(StateStack* stateStack, Context context)
 	state->requestStackPop = requestStackPop;
 	state->requestStackClear = requestStackClear;
 
+	// destructor:
+	state->deleteState = deleteState;
+
 	return state;
+}
+
+void deleteState(State* state)
+{
+	free(state);
+	state = NULL;
 }
 
 Context createContext(sfRenderWindow* window)

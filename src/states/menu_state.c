@@ -18,7 +18,19 @@ State* createMenuState(StateStack* stateStack, Context context)
 	state->update = updateMenuState;
 	state->handleEvent = handleMenuStateEvent;
 
+	// virtual destructor:
+	state->deleteState = deleteMenuState;
+
 	return state;
+}
+
+void deleteMenuState(State* state)
+{
+	// derived destructor:
+	MenuState* derivedPart = (MenuState*)state->m_derived;
+	free(derivedPart);
+	// base destructor:
+	deleteState(state);
 }
 
 void drawMenuState(State* menuState)
@@ -28,6 +40,7 @@ void drawMenuState(State* menuState)
 	sfCircleShape_setFillColor(circle, sfGreen);
 	Context context = getContext(menuState);
 	sfRenderWindow_drawCircleShape(context.m_window, circle, NULL);
+	sfCircleShape_destroy(circle);
 }
 
 bool updateMenuState(State* menuState, sfTime deltaTime)
