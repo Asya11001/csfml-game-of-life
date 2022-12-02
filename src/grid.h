@@ -19,8 +19,10 @@ void deleteGrid(Grid* grid);
 
 void updateGrid(Grid* grid, sfTime deltaTime);
 void updateGridLogic(Grid* grid);
-void updateAliveCell(sfRectangleShape* old, sfRectangleShape* new);
-void updateDeadCell(sfRectangleShape* old, sfRectangleShape* new);
+void updateAliveCell(sfRectangleShape*** oldCells, sfRectangleShape* new, int row, int col);
+void updateDeadCell(sfRectangleShape*** oldCells, sfRectangleShape* new, int row, int col);
+
+int getNumberOfAliveNeighbours(sfRectangleShape*** oldCells, int row, int col);
 bool isAlive(sfRectangleShape* cell);
 
 void drawGrid(const Grid* grid, sfRenderWindow* window);

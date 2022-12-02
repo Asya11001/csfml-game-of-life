@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Color.h>
 
 #include <stdlib.h>
+#include <stdio.h>
 
 Grid* createNewGrid(int size)
 {
@@ -50,6 +51,7 @@ void updateGrid(Grid* grid, sfTime deltaTime)
 	if (grid->m_elapsedTime.microseconds >= sfSeconds(1.0f).microseconds)
 	{
 		updateGridLogic(grid);
+		grid->m_elapsedTime.microseconds = 0;
 	}
 }
 
@@ -72,11 +74,20 @@ void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size)
 		for (int col = 0; col < size; ++col)
 		{
 			sfRectangleShape* rectangle = sfRectangleShape_create();
-			sfVector2f position = { row * 15 + 5, col * 15 + 5 };
+			// column is x, row is y
+			sfVector2f position = { col * 15 + 5, row * 15 + 5 };
 			sfRectangleShape_setPosition(rectangle, position);
 			sfVector2f sizes = { 10, 10 };
 			sfRectangleShape_setSize(rectangle, sizes);
-			sfRectangleShape_setFillColor(rectangle, sfWhite);
+			if (row == 0 && col == 1 || row == 1 && col == 2 || row == 2 && col == 0 ||
+				row == 2 && col == 1 || row == 2 && col == 2)
+			{
+				sfRectangleShape_setFillColor(rectangle, sfWhite);
+			}
+			else
+			{
+				sfRectangleShape_setFillColor(rectangle, sfGreen);
+			}
 			rectangles[row][col] = rectangle;
 		}
 	}
@@ -88,8 +99,10 @@ void updateGridLogic(Grid* grid)
 	sfRectangleShape*** newRectangles = malloc(grid->m_currentSize * sizeof(sfRectangleShape**));
 	for (int i = 0; i < grid->m_currentSize; ++i)
 	{
-		newRectangles[i] = malloc(grid->m_currentSize* sizeof(sfRectangleShape*));
+		newRectangles[i] = malloc(grid->m_currentSize * sizeof(sfRectangleShape*));
 	}
+
+	initializeRectangleMatrix(newRectangles, grid->m_currentSize);
 
 	// check the game logic
 	for (int row = 0; row < grid->m_currentSize; ++row)
@@ -100,24 +113,81 @@ void updateGridLogic(Grid* grid)
 			sfRectangleShape* newCell = newRectangles[row][col];
 			if (isAlive(cell))
 			{
-				updateAliveCell(cell, newCell);
+				updateAliveCell(grid->m_rectangles, newCell, row, col);
 			}
 			else
 			{
-				updateDeadCell(cell, newCell);
+				updateDeadCell(grid->m_rectangles, newCell, row, col);
 			}
 		}
 	}
+
+	for (int i = 0; i < grid->m_currentSize; ++i)
+	{
+		for (int j = 0; j < grid->m_currentSize; ++j)
+		{
+			sfRectangleShape_destroy(grid->m_rectangles[i][j]);
+		}
+	}
+
+	for (int i = 0; i < grid->m_currentSize; ++i)
+	{
+		free(grid->m_rectangles[i]);
+	}
+	free(grid->m_rectangles);
+
+	grid->m_rectangles = newRectangles;
 }
 
-void updateAliveCell(sfRectangleShape* old, sfRectangleShape* new)
+void updateAliveCell(sfRectangleShape*** oldCells, sfRectangleShape* new, int row, int col)
 {
-
+	int numberOfAliveNeighbours = getNumberOfAliveNeighbours(oldCells, row, col);
+	if (numberOfAliveNeighbours == 2 || numberOfAliveNeighbours == 3)
+	{
+		sfRectangleShape_setFillColor(new, sfWhite);
+	}
+	else
+	{
+		sfRectangleShape_setFillColor(new, sfGreen);
+	}
 }
 
-void updateDeadCell(sfRectangleShape* old, sfRectangleShape* new)
+void updateDeadCell(sfRectangleShape*** oldCells, sfRectangleShape* new, int row, int col)
 {
+	if (getNumberOfAliveNeighbours(oldCells, row, col) == 3)
+	{
+		sfRectangleShape_setFillColor(new, sfWhite);
+	}
+	else
+	{
+		sfRectangleShape_setFillColor(new, sfGreen);
+	}
+}
 
+int getNumberOfAliveNeighbours(sfRectangleShape*** oldCells, int row, int col)
+{
+	int numberOfAliveNeighbours = 0;
+	// 8 possible neighbour indices:
+	int rowOffset[] = { 1, 0, 1, -1, 0, -1, -1, 1 };
+	int colOffset[] = { 0, 1, 1, 0, -1, -1, 1, -1 };
+	for (int i = 0; i < 8; ++i)
+	{
+		int neighbourRowIndex = row + rowOffset[i];
+		int neighbourColIndex = col + colOffset[i];
+		// if it's a corner type cell it will have either 5 or 3 neighbours
+		if (neighbourRowIndex < 0 || neighbourRowIndex > 10 - 1 ||
+			neighbourColIndex < 0 || neighbourColIndex > 10 - 1)
+		{
+			continue;
+		}
+
+		if (isAlive(oldCells[neighbourRowIndex][neighbourColIndex]))
+		{
+			++numberOfAliveNeighbours;
+		}
+	}
+
+	return numberOfAliveNeighbours;
 }
 
 bool isAlive(sfRectangleShape* cell)
