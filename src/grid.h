@@ -9,24 +9,27 @@
 
 typedef struct Grid
 {
-	sfRectangleShape*** m_rectangles;
+	sfRectangleShape*** m_cells;
 	int m_currentSize;
 	sfTime m_elapsedTime;
 } Grid;
 
 Grid* createNewGrid(int size);
 void deleteGrid(Grid* grid);
+void deleteGridCells(Grid* grid);
 
 void updateGrid(Grid* grid, sfTime deltaTime);
-void updateGridLogic(Grid* grid);
-void updateAliveCell(sfRectangleShape*** oldCells, sfRectangleShape* new, int row, int col);
-void updateDeadCell(sfRectangleShape*** oldCells, sfRectangleShape* new, int row, int col);
 
-int getNumberOfAliveNeighbours(sfRectangleShape*** oldCells, int row, int col);
+void updateGridLogic(Grid* grid);
+void updateAliveCell(Grid* grid, sfRectangleShape* new, int row, int col);
+void updateDeadCell(Grid* grid, sfRectangleShape* new, int row, int col);
+
+int getNumberOfAliveNeighbours(Grid* grid, int row, int col);
 bool isAlive(sfRectangleShape* cell);
 
 void drawGrid(const Grid* grid, sfRenderWindow* window);
 
-void initializeRectangleMatrix(sfRectangleShape*** rectangles, int size);
+void initializeCellMatrix(sfRectangleShape*** cells, int size);
+sfRectangleShape*** allocateAndInitializeCells(int size);
 
 #endif
