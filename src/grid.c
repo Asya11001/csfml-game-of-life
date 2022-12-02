@@ -74,12 +74,12 @@ void initializeCellMatrix(sfRectangleShape*** cells, int size)
 		{
 			sfRectangleShape* cell = sfRectangleShape_create();
 			// column is x, row is y
-			sfVector2f position = { col * 15 + 5, row * 15 + 5 };
+			sfVector2f position = { (float)col * 15 + 5, (float)row * 15 + 5 };
 			sfRectangleShape_setPosition(cell, position);
 			sfVector2f sizes = { 10, 10 };
 			sfRectangleShape_setSize(cell, sizes);
-			if (row == 0 && col == 1 || row == 1 && col == 2 || row == 2 && col == 0 ||
-				row == 2 && col == 1 || row == 2 && col == 2)
+			if ((row == 0 && col == 1) || (row == 1 && col == 2) || (row == 2 && col == 0) ||
+				(row == 2 && col == 1) || (row == 2 && col == 2))
 			{
 				sfRectangleShape_setFillColor(cell, sfWhite);
 			}
@@ -99,8 +99,8 @@ void resetGridCellColors(sfRectangleShape*** cells, int size)
 		for (int col = 0; col < size; ++col)
 		{
 			sfRectangleShape* cell = cells[row][col];
-			if (row == 0 && col == 1 || row == 1 && col == 2 || row == 2 && col == 0 ||
-				row == 2 && col == 1 || row == 2 && col == 2)
+			if ((row == 0 && col == 1) || (row == 1 && col == 2) || (row == 2 && col == 0) ||
+				(row == 2 && col == 1) || (row == 2 && col == 2))
 			{
 				sfRectangleShape_setFillColor(cell, sfWhite);
 			}
@@ -114,10 +114,10 @@ void resetGridCellColors(sfRectangleShape*** cells, int size)
 
 sfRectangleShape*** allocateAndInitializeCells(int size)
 {
-	sfRectangleShape*** cells = malloc(size * sizeof(sfRectangleShape**));
+	sfRectangleShape*** cells = malloc((long unsigned int)size * sizeof(sfRectangleShape**));
 	for (int i = 0; i < size; ++i)
 	{
-		cells[i] = malloc(size * sizeof(sfRectangleShape*));
+		cells[i] = malloc((long unsigned int)size * sizeof(sfRectangleShape*));
 	}
 
 	initializeCellMatrix(cells, size);

@@ -8,7 +8,7 @@
 
 StateStack createStateStack(Context context)
 {
-	StateStack stateStack = { {}, {}, context };
+	StateStack stateStack = { { 0 }, { 0 }, context };
 	return stateStack;
 }
 

@@ -43,7 +43,8 @@ void drawMenuState(State* menuState)
 	sfCircleShape_destroy(circle);
 }
 
-bool updateMenuState(State* menuState, sfTime deltaTime)
+bool updateMenuState(__attribute__((unused)) State* menuState,
+		__attribute__((unused)) sfTime deltaTime)
 {
 	return true;
 }

@@ -23,7 +23,7 @@ void pendingChangeArrayPushBack(PendingChangeArray* pendingChangeArray, const Pe
 {
 	int length = pendingChangeArray->m_length;
 
-	PendingChange* data = malloc((length + 1) * sizeof(PendingChange));
+	PendingChange* data = malloc((long unsigned int)(length + 1) * sizeof(PendingChange));
 
 	for (int before = 0; before < length; ++before)
 	{
@@ -66,7 +66,7 @@ void stateArrayPushBack(StateArray* stateArray, State* state)
 {
 	int length = stateArray->m_length;
 	// create new array one element larger than the old one
-	State** data = malloc((length + 1) * sizeof(State*));
+	State** data = malloc((long unsigned int)(length + 1) * sizeof(State*));
 
 	// copy all elements up to the end
 	for (int before = 0; before < length; ++before)
@@ -97,7 +97,7 @@ void stateArrayPopBack(StateArray* stateArray)
 		return;
 	}
 
-	State** data = malloc((length - 1) * sizeof(State*));
+	State** data = malloc((long unsigned int)(length - 1) * sizeof(State*));
 
 	for (int before = 0; before < length - 1; ++before)
 	{

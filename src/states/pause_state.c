@@ -43,7 +43,8 @@ void drawPauseState(State* pauseState)
 	drawGrid(derivedPart->m_grid, window);
 }
 
-bool updatePauseState(State* pauseState, sfTime deltaTime)
+bool updatePauseState(__attribute__((unused)) State* pauseState,
+		__attribute__((unused)) sfTime deltaTime)
 {
 	return true;
 }

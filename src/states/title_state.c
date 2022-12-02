@@ -43,7 +43,8 @@ void drawTitleState(State* titleState)
 	sfCircleShape_destroy(circle);
 }
 
-bool updateTitleState(State* titleState, sfTime deltaTime)
+bool updateTitleState(__attribute__((unused)) State* titleState,
+		__attribute__((unused)) sfTime deltaTime)
 {
 	return true;
 }
