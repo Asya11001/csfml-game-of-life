@@ -35,4 +35,6 @@ sfRectangleShape*** allocateAndInitializeCells(int size);
 // reset to the image that is displayed on first launch
 void resetGridCellColors(sfRectangleShape*** cells, int size);
 
+void makeGlider(sfRectangleShape* cell, int row, int col);
+
 #endif

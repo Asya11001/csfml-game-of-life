@@ -78,15 +78,7 @@ void initializeCellMatrix(sfRectangleShape*** cells, int size)
 			sfRectangleShape_setPosition(cell, position);
 			sfVector2f sizes = { 10, 10 };
 			sfRectangleShape_setSize(cell, sizes);
-			if ((row == 0 && col == 1) || (row == 1 && col == 2) || (row == 2 && col == 0) ||
-				(row == 2 && col == 1) || (row == 2 && col == 2))
-			{
-				sfRectangleShape_setFillColor(cell, sfWhite);
-			}
-			else
-			{
-				sfRectangleShape_setFillColor(cell, sfGreen);
-			}
+			makeGlider(cell, row, col);
 			cells[row][col] = cell;
 		}
 	}
@@ -99,15 +91,7 @@ void resetGridCellColors(sfRectangleShape*** cells, int size)
 		for (int col = 0; col < size; ++col)
 		{
 			sfRectangleShape* cell = cells[row][col];
-			if ((row == 0 && col == 1) || (row == 1 && col == 2) || (row == 2 && col == 0) ||
-				(row == 2 && col == 1) || (row == 2 && col == 2))
-			{
-				sfRectangleShape_setFillColor(cell, sfWhite);
-			}
-			else
-			{
-				sfRectangleShape_setFillColor(cell, sfGreen);
-			}
+			makeGlider(cell, row, col);
 		}
 	}
 }
@@ -210,4 +194,18 @@ bool isAlive(sfRectangleShape* cell)
 {
 	sfColor cellColor = sfRectangleShape_getFillColor(cell);
 	return (colorsAreEqual(&cellColor, &sfWhite));
+}
+
+// functions to make custom shapes:
+void makeGlider(sfRectangleShape* cell, int row, int col)
+{
+	if ((row == 0 && col == 1) || (row == 1 && col == 2) || (row == 2 && col == 0) ||
+		(row == 2 && col == 1) || (row == 2 && col == 2))
+	{
+		sfRectangleShape_setFillColor(cell, sfWhite);
+	}
+	else
+	{
+		sfRectangleShape_setFillColor(cell, sfGreen);
+	}
 }
